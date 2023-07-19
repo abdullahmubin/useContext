@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import FontSizeContext from "./context";
+import { useState } from "react";
+import PageOne from "./PageOne";
+import PageTwo from "./PageTwo";
+const App = () => {
+  const [size, setSize] = useState(16);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FontSizeContext.Provider value={size}>
+      <PageOne />
+      <PageTwo />
+      <button onClick={() => setSize(size + 5)}>Increase font</button>
+      <button
+        onClick={() =>
+          setSize((prevSize) => Math.min(11, prevSize - 5))
+        }
+      >
+        Decrease font
+      </button>
+    </FontSizeContext.Provider>
   );
-}
-
+};
 export default App;
